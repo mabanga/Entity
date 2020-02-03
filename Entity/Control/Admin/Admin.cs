@@ -76,6 +76,8 @@ namespace Control
         }
         public Person CreatePerson()
         {
+            Person addedPerson = new Person { Gender = Gender.Undefined };
+
             Console.Write("FirstName: ");
             string firstname = Console.ReadLine();
             System.Console.Write($"Last Name: ");
@@ -92,16 +94,31 @@ namespace Control
             string zipcode = System.Console.ReadLine();
             System.Console.Write("city: ");
             string city = System.Console.ReadLine();
+            int value = -1;
+
+            value = Action("Gender: 1.Male   0.Female: ");
+            if (value == 1)
+            {
+                addedPerson.Gender = Gender.Male;
+            }
+            else if (value == 0)
+            {
+                addedPerson.Gender = Gender.Female;
+            }
+            else
+            {
+                addedPerson.Gender = Gender.Undefined;
+            }
             System.Console.Write("Birth Date: ");
             DateTime birthdate = Convert.ToDateTime(System.Console.ReadLine());
             System.Console.Write("Dead Date: ");
             DateTime deaddate = Convert.ToDateTime(System.Console.ReadLine());
-            Person addedPerson = new Person()
+            addedPerson = new Person()
             {
                 Address = new Address(street, number, postbox, zipcode, city),
                 Name = new Name(firstname, " ", lastName),
                 BirthDate = birthdate,
-                //Gender = (Gender)gender,
+                Gender = addedPerson.Gender,
                 isMaried = ismaried,
                 ID = _id++
             };
