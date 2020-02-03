@@ -8,7 +8,7 @@ namespace Control.Interfaces
 {
     public interface IPerson
     {
-        public bool isMaried { get; set; }
-        public bool hasChildren { get; set; }
+        bool isMaried { get; set; }
+        bool hasChildren { get; set; }
     }
 }
