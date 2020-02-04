@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Control.Interfaces
+namespace Model
 {
-    public interface IPerson
+    public enum SoortItem
     {
-        bool isMaried { get; set; }
-        bool hasChildren { get; set; }
+        Boek, Stripverhaal, DVD, CD
     }
 }
