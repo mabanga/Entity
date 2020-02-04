@@ -10,7 +10,7 @@ namespace Model
     {
         public string FamilieNaam { get; set; }
         public string VoorNaam { get; set; }
-        void RegistreerLid() { }
+        void RegistreerAlsLid() { }
         public virtual void ZoekItem() { }
         public virtual void ToonOverzicht() { }
 
