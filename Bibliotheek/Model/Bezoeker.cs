@@ -14,5 +14,16 @@ namespace Model
         public virtual void ZoekItem() { }
         public virtual void ToonOverzicht() { }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"{VoorNaam} {FamilieNaam}");
+            return $"{sb}"; 
+        }
+        public Bezoeker()
+        {
+
+        }
+
     }
 }
