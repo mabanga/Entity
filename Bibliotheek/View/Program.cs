@@ -89,7 +89,14 @@ namespace View
                 Console.Clear();
 
                 Start("You are about Bezoek...");
+                Console.Write("Familienaam: ");
+                string familienaam=Console.ReadLine();
+                Console.Write("Voornaam: ");
+                string voornaam=Console.ReadLine();
 
+                Console.Clear();
+
+                Start($"Welkom {familienaam} {voornaam}");
                 BezoekMenu = Action("0(Overzicht) \n1(Registreer Als Lid) \n2(Item Zoeken)\n");
                 switch (BezoekMenu)
                 {

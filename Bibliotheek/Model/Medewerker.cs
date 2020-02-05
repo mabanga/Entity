@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Medewerker:Bezoeker
+    public class Medewerker:Lid
     {
         public void PromoveerLidNaarMedewerker() { }
         public void VoerItemAf() { }
