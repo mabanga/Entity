@@ -1,8 +1,5 @@
 ﻿using L_Control;
-using L_Control.Interfaces;
-using L_Model.Models;
 using System;
-using System.Collections.Generic;
 
 
 namespace L_View
