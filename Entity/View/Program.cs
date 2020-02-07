@@ -7,21 +7,8 @@ using System.Threading;
 
 namespace View
 {
-    class Program
+    public class Program
     {
-        public static String strConsoleTitle;
-        public static int intHeight = 30;
-        public static int intWidth = 90;
-        public static int index = 0;
-        public static int intLeft = 40; public static int intTop = 0;
-        public static string strUserName, Username, Password, strPassword = string.Empty;
-        public static string strZmco = "ZM Co";
-        public static string strAppDesc = "Cette Application vous permet de créer un arbre géalogique";
-        public static string strAppDesc2 = "Vous pourriez créer, ou modifier l'arbre";
-        public static string strAppDesc3 = "Commencez par créer une personne";
-        public static string strCopyRight = "CopyRight 2020 - ZM Co";
-        public static string strAppTitle = "arbre géalogique";
-
         static void Main(string[] args)
         {
             IUnity tussen = new Switch().Bridge();
@@ -29,8 +16,10 @@ namespace View
             var persons = tussen.Persons();
             var animals = tussen.Animals();
             //<<console
-            AppConsole();
+            MyConsole myConsole = new MyConsole();
             //console>>
+            AppExec();
+
             #region true
             //int SelectedMenu = 6;
             //int CreatedMenu = 6;
@@ -125,6 +114,41 @@ namespace View
             #endregion
             Console.ReadKey();
         }
+static void Create()
+        {
+            IUnity tussen = new Switch().Bridge();
+            var entities = tussen.Unities();
+            var persons = tussen.Persons();
+            var animals = tussen.Animals();
+            int CreatedMenu = -1;
+            Console.SetCursorPosition(35, 12);
+
+            string creating = "You are about Creating...";
+            Console.WriteLine(creating);
+            while (CreatedMenu != 0)
+            {
+                Console.SetCursorPosition(30, 13);
+
+                CreatedMenu = Action("Choose 0(Quit) - 1(Person) - 2(Animal): ");
+                switch (CreatedMenu)
+                {
+                    case 1:
+                        Console.Clear();
+                        Start();
+                        Console.WriteLine("You are about to Create a Person");
+                        tussen.CreatePerson();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Start();
+                        Console.WriteLine("You are about to Create an animal");
+                        tussen.CreateAnimal();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         private static int Action(string message)
         {
@@ -144,6 +168,7 @@ namespace View
             Console.Clear();
             Console.WriteLine(start);
         }
+
 
 
         static void AppConsole()
@@ -218,20 +243,31 @@ namespace View
         {
             AppExecBg();
             List<string> menuItems = new List<string>() { "create", "read", "update", "delete","exit" };
+=======
+
+
+
+
+        public static void AppExec()
+        {
+            //AppExecBg();
+            List<string> menuItems = new List<string>() { "create", "read", "update", "delete", "exit" };
+>>>>>>> c9a33771df6707aea833584a0b29e83dc866c008
 
             Console.CursorVisible = false;
 
             while (true)
             {
-                AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+                //AppExecBg();
+                //AppTitle();
+                //AppDesc();
+                //AppCopyRight();
                 Console.BackgroundColor = ConsoleColor.Blue;
                 string strSelectedMenuItem = MyMenu(menuItems);
-                Program.intLeft = 40; Program.intTop = 14;
+                //Program.intLeft = 40; Program.intTop = 14;
                 switch (strSelectedMenuItem)
                 {
+<<<<<<< HEAD
                     case "voir":
                         Menu.MenuCreate();
                         break;
@@ -240,9 +276,22 @@ namespace View
                         break;
                     case "modifier":
                         Menu.MenuUpdate();
+=======
+                    case "create":
+                        Menu.MenuCreate();
+                        break;
+                    case "read":
+                        Menu.MenuRead();
+                        break;
+                    case "update":
+                        Menu.MenuUpdate();
+                        break;
+                    case "delete":
+                        Menu.MenuDelete();
+>>>>>>> c9a33771df6707aea833584a0b29e83dc866c008
                         break;
                     case "exit":
-                        Menu.MenuExit();
+                        Menu.MenuDelete();
                         break;
                     case "delete":
                         //Menu.MenuDelete();
@@ -254,29 +303,50 @@ namespace View
                 }
             }
         }
-        static string MyMenu(List<string> items)
+
+        public static string MyMenu(List<string> items)
         {
+            Console.Clear();
+            MyConsole myConsole = new MyConsole();
+
+            //int index = 0;
             int intLeft = 12; int intTop = 11;
             Console.SetCursorPosition(intLeft, intTop);
             for (int i = 0; i < items.Count; i++)
             {
+<<<<<<< HEAD
                 List<string> menuItemsDescription = new List<string>() { "you are about Creating a person",
                 "You are about Reading persons","You are about Updating a person","you are about Deleting a person",
                 "you are about to Quit Application"};
                 Console.SetCursorPosition(intLeft, intTop += 2);
 
+=======
+                List<string> menuItemsDescription = new List<string>() { "You are about to CREATE",
+                "You are about to READ","You are about to UPDATE","You are about to DELETE",
+                "You are about to QUIT"};
+                Console.SetCursorPosition(intLeft, intTop += 2);
+                Console.ResetColor();
+>>>>>>> c9a33771df6707aea833584a0b29e83dc866c008
                 if (i == index)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    //Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine((items[i]).ToUpper());
                     Console.SetCursorPosition(25, 17);
+                    //Console.BackgroundColor = ConsoleColor.Blue;
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.BackgroundColor = ConsoleColor.Green;
                     Console.WriteLine(menuItemsDescription[index]);
+<<<<<<< HEAD
                     Console.BackgroundColor = ConsoleColor.Blue;
+=======
+>>>>>>> c9a33771df6707aea833584a0b29e83dc866c008
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = ConsoleColor.Blue;
                     Console.WriteLine((items[i]).ToLower());
                 }
 
@@ -285,10 +355,7 @@ namespace View
 
             if (ckey.Key == ConsoleKey.DownArrow)
             {
-                AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+
 
                 if (Program.index == items.Count - 1)
                 {
@@ -301,10 +368,10 @@ namespace View
             }
             else if (ckey.Key == ConsoleKey.UpArrow)
             {
-                AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+                //AppExecBg();
+                //AppTitle();
+                //AppDesc();
+                //AppCopyRight();
                 if (Program.index <= 0)
                 {
                     Program.index = items.Count - 1;
@@ -329,7 +396,7 @@ namespace View
         {
             private const string Path = @"c:\Res\dailypurpose.txt";
 
-            public static void MenuExit()
+            public static void MenuDelete()
             {
                 AppExecBgAll();
                 for (int i = 11; i < 50; i += 15)
@@ -372,9 +439,9 @@ namespace View
                     for (int i = 1; i < lstStrListeTaches_Longueur + 1; i++)
                     {
                         AppExecBg();
-                        AppTitle();
-                        AppDesc();
-                        AppCopyRight();
+                        //AppTitle();
+                        //AppDesc();
+                        //AppCopyRight();
                         Console.BackgroundColor = ConsoleColor.Green;
                         Console.CursorVisible = true;
                         Console.SetCursorPosition(25, 16);
@@ -407,14 +474,21 @@ namespace View
             public static void MenuCreate()
             {
                 AppExecBg();
-                Console.SetCursorPosition(Program.intLeft - 15, 11 + 2);
-                using (StreamReader sr = new StreamReader(File.Open(Path, FileMode.Open)))
-                {
-                    Console.WriteLine(sr.ReadLine());
-                    sr.Close();
-                    Thread.Sleep(3000);
-                }
-                Console.SetCursorPosition(Program.intLeft - 15, 21);
+                //Console.SetCursorPosition(35, 12);
+                //using (StreamReader sr = new StreamReader(File.Open(Path, FileMode.Open)))
+                //{
+                //    Console.WriteLine(sr.ReadLine());
+                //    sr.Close();
+                //    Thread.Sleep(3000);
+                //}
+                //AppConsole();
+                Create();
+                //Console.SetCursorPosition(Program.intLeft - 15, 21);
+
+
+
+
+                //AppConsole();
 
                 Console.WriteLine("Press any key to quit...");
                 Console.ReadKey();
@@ -428,9 +502,9 @@ namespace View
                 string strTache = string.Empty;
                 Console.CursorVisible = true;
                 AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+                //AppTitle();
+                //AppDesc();
+                //AppCopyRight();
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.CursorVisible = true;
                 Console.SetCursorPosition(25, 16);
@@ -475,42 +549,6 @@ namespace View
                 Console.SetCursorPosition(22, i);
                 Console.Write(new string(' ', 56));
             }
-        }
-        public static void AppCopyRight()
-        {
-            AppCopyRightBg();
-
-            Console.SetCursorPosition((Program.intWidth - Program.strCopyRight.Length) - 3, 27);
-            Console.WriteLine(Program.strCopyRight + " ");
-
-            Console.SetCursorPosition(2, 27);
-            Console.Write(" " + DateTime.Now);
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-            Console.CursorVisible = false;
-        }
-        static void AppCopyRightBg()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.BackgroundColor = ConsoleColor.White;
-            for (int i = 26; i < 29; i++)
-            {
-                Console.SetCursorPosition(2, i);
-                Console.Write(new string(' ', 86));
-            }
-        }
-        public static void AppQuit()
-        {
-            Console.SetCursorPosition(35, 24);
-            Console.CursorVisible = false;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Press any key to quit...");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-            Console.ReadKey();
-            Environment.Exit(0);
         }
     }
 }
