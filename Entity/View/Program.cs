@@ -21,6 +21,7 @@ namespace View
         public static string strAppDesc3 = "Commencez par créer une personne";
         public static string strCopyRight = "CopyRight 2020 - ZM Co";
         public static string strAppTitle = "arbre géalogique";
+
         static void Main(string[] args)
         {
             IUnity tussen = new Switch().Bridge();
@@ -124,6 +125,7 @@ namespace View
             #endregion
             Console.ReadKey();
         }
+
         private static int Action(string message)
         {
             int action;
@@ -142,7 +144,9 @@ namespace View
             Console.Clear();
             Console.WriteLine(start);
         }
-        public static void AppConsole()
+
+
+        static void AppConsole()
         {
             strConsoleTitle = strZmco + " - " + strAppTitle.ToUpper();
             Console.SetBufferSize(120, 60);
@@ -198,7 +202,7 @@ namespace View
             }
             //Console.ResetColor();
         }
-        public static void AppDesc()
+        static void AppDesc()
         {
             AppDescBg();
             Console.SetCursorPosition((intWidth / 2) - (strAppDesc.Length / 2), 7);
@@ -210,10 +214,10 @@ namespace View
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.DarkCyan;
         }
-        public static void AppExec()
+        static void AppExec()
         {
             AppExecBg();
-            List<string> menuItems = new List<string>() { "voir", "ajouter", "modifier", "exit" };
+            List<string> menuItems = new List<string>() { "create", "read", "update", "delete","exit" };
 
             Console.CursorVisible = false;
 
@@ -229,16 +233,20 @@ namespace View
                 switch (strSelectedMenuItem)
                 {
                     case "voir":
-                        Menu.MenuVoir();
+                        Menu.MenuCreate();
                         break;
                     case "ajouter":
-                        Menu.MenuAjout();
+                        Menu.MenuRead();
                         break;
                     case "modifier":
-                        Menu.MenuModifier();
+                        Menu.MenuUpdate();
                         break;
                     case "exit":
                         Menu.MenuExit();
+                        break;
+                    case "delete":
+                        //Menu.MenuDelete();
+                        Console.WriteLine("deleting...");
                         break;
                     default:
                         Console.WriteLine("");
@@ -252,19 +260,19 @@ namespace View
             Console.SetCursorPosition(intLeft, intTop);
             for (int i = 0; i < items.Count; i++)
             {
-                List<string> menuItemsDescription = new List<string>() { "ici pour voir les taches à faire",
-                "ici pour ajouter des taches","ici pour modifier ou supprimer les taches",
-                "ici pour quitter l'application"};
+                List<string> menuItemsDescription = new List<string>() { "you are about Creating a person",
+                "You are about Reading persons","You are about Updating a person","you are about Deleting a person",
+                "you are about to Quit Application"};
                 Console.SetCursorPosition(intLeft, intTop += 2);
 
-                if (i == Program.index)
+                if (i == index)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine((items[i]).ToUpper());
                     Console.SetCursorPosition(25, 17);
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.BackgroundColor = ConsoleColor.Green;
-                    Console.WriteLine(menuItemsDescription[Program.index]);
+                    Console.WriteLine(menuItemsDescription[index]);
                     Console.BackgroundColor = ConsoleColor.Blue;
                 }
                 else
@@ -349,7 +357,7 @@ namespace View
                     Console.Write(new string(' ', 69));
                 }
             }
-            public static void MenuAjout()
+            public static void MenuRead()
             {
                 List<string> lstStrListeTaches = new List<string> { };
                 AppExecBg();
@@ -396,7 +404,7 @@ namespace View
 
                 Thread.Sleep(1500);
             }
-            public static void MenuVoir()
+            public static void MenuCreate()
             {
                 AppExecBg();
                 Console.SetCursorPosition(Program.intLeft - 15, 11 + 2);
@@ -412,7 +420,7 @@ namespace View
                 Console.ReadKey();
 
             }
-            public static void MenuModifier()
+            public static void MenuUpdate()
             {
                 List<string> lstStrListeTaches = new List<string> { };
                 AppExecBg();
