@@ -9,18 +9,18 @@ namespace View
 {
     public class Program
     {
-        public static String strConsoleTitle;
-        public static int intHeight = 30;
-        public static int intWidth = 90;
+        //public static String strConsoleTitle;
+        //public static int intHeight = 30;
+        //public static int intWidth = 90;
         public static int index = 0;
-        public static int intLeft = 40; public static int intTop = 0;
-        public static string strUserName, Username, Password, strPassword = string.Empty;
-        public static string strZmco = "ZM Co";
-        public static string strAppDesc = "Cette Application vous permet de créer un arbre géalogique";
-        public static string strAppDesc2 = "Vous pourriez créer, ou modifier l'arbre";
-        public static string strAppDesc3 = "Commencez par créer une personne";
-        public static string strCopyRight = "CopyRight 2020 - ZM Co";
-        public static string strAppTitle = "arbre généalogique";
+        //public static int intLeft = 40; public static int intTop = 0;
+        //public static string strUserName, Username, Password, strPassword = string.Empty;
+        //public static string strZmco = "ZM Co";
+        //public static string strAppDesc = "Cette Application vous permet de créer un arbre géalogique";
+        //public static string strAppDesc2 = "Vous pourriez créer, ou modifier l'arbre";
+        //public static string strAppDesc3 = "Commencez par créer une personne";
+        //public static string strCopyRight = "CopyRight 2020 - ZM Co";
+        //public static string strAppTitle = "arbre généalogique";
         static void Main(string[] args)
         {
             IUnity tussen = new Switch().Bridge();
@@ -28,8 +28,10 @@ namespace View
             var persons = tussen.Persons();
             var animals = tussen.Animals();
             //<<console
-            AppConsole();
+            MyConsole myConsole = new MyConsole();
             //console>>
+            AppExec();
+
             #region true
             //int SelectedMenu = 6;
             //int CreatedMenu = 6;
@@ -177,90 +179,26 @@ namespace View
             Console.Clear();
             Console.WriteLine(start);
         }
-        public static void AppConsole()
-        {
-            strConsoleTitle = strZmco + " - " + strAppTitle.ToUpper();
-            Console.SetBufferSize(120, 60);
-            Console.SetWindowSize(intWidth, intHeight);
-            Console.Title = strConsoleTitle;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Clear();
-            AppTitle();
-            AppDesc();
-            AppCopyRight();
-            AppExec();
-            //AppQuit();
-        }
-        static void AppTitleBg()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.BackgroundColor = ConsoleColor.White;
-            for (int i = 1; i < 6; i++)
-            {
-                Console.SetCursorPosition(2, i);
-                Console.Write(new string(' ', 86));
-            }
-        }
-        static void AppTitle()
-        {
-            Console.SetBufferSize(120, 60);
-            AppTitleBg();
-            Console.SetCursorPosition((intWidth / 2) - (strAppTitle.Length / 2), 2);
-            for (int i = 0; i < strAppTitle.Length + 4; i++)
-            {
-                Console.Write("#");
-            }
-            Console.SetCursorPosition((intWidth / 2) - (strAppTitle.Length / 2), 3);
-            Console.WriteLine("# " + strAppTitle.ToUpper() + " #");
-            Console.SetCursorPosition((intWidth / 2) - (strAppTitle.Length / 2), 4);
-            for (int i = 0; i < strAppTitle.Length + 4; i++)
-            {
-                Console.Write("#");
-            }
 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-        }
-        static void AppDescBg()
-        {
-            Console.BackgroundColor = ConsoleColor.Gray;
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            for (int i = 7; i < 10; i++)
-            {
-                Console.SetCursorPosition(2, i);
-                Console.Write(new string(' ', 86));
-            }
-            //Console.ResetColor();
-        }
-        public static void AppDesc()
-        {
-            AppDescBg();
-            Console.SetCursorPosition((intWidth / 2) - (strAppDesc.Length / 2), 7);
-            Console.Write(strAppDesc);
-            Console.SetCursorPosition((intWidth / 2) - (strAppDesc2.Length / 2), 8);
-            Console.Write(strAppDesc2);
-            Console.SetCursorPosition((intWidth / 2) - (strAppDesc3.Length / 2), 9);
-            Console.WriteLine(strAppDesc3);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-        }
+
+
+
         public static void AppExec()
         {
-            AppExecBg();
-            List<string> menuItems = new List<string>() { "create", "read", "update", "delete","exit" };
+            //AppExecBg();
+            List<string> menuItems = new List<string>() { "create", "read", "update", "delete", "exit" };
 
             Console.CursorVisible = false;
 
             while (true)
             {
-                AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+                //AppExecBg();
+                //AppTitle();
+                //AppDesc();
+                //AppCopyRight();
                 Console.BackgroundColor = ConsoleColor.Blue;
                 string strSelectedMenuItem = MyMenu(menuItems);
-                Program.intLeft = 40; Program.intTop = 14;
+                //Program.intLeft = 40; Program.intTop = 14;
                 switch (strSelectedMenuItem)
                 {
                     case "create":
@@ -284,8 +222,13 @@ namespace View
                 }
             }
         }
-        static string MyMenu(List<string> items)
+
+        public static string MyMenu(List<string> items)
         {
+            Console.Clear();
+            MyConsole myConsole = new MyConsole();
+
+            //int index = 0;
             int intLeft = 12; int intTop = 11;
             Console.SetCursorPosition(intLeft, intTop);
             for (int i = 0; i < items.Count; i++)
@@ -294,19 +237,23 @@ namespace View
                 "You are about to READ","You are about to UPDATE","You are about to DELETE",
                 "You are about to QUIT"};
                 Console.SetCursorPosition(intLeft, intTop += 2);
-
-                if (i == Program.index)
+                Console.ResetColor();
+                if (i == index)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    //Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine((items[i]).ToUpper());
                     Console.SetCursorPosition(25, 17);
+                    //Console.BackgroundColor = ConsoleColor.Blue;
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.BackgroundColor = ConsoleColor.Green;
-                    Console.WriteLine(menuItemsDescription[Program.index]);
-                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(menuItemsDescription[index]);
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = ConsoleColor.Blue;
                     Console.WriteLine((items[i]).ToLower());
                 }
 
@@ -315,10 +262,7 @@ namespace View
 
             if (ckey.Key == ConsoleKey.DownArrow)
             {
-                AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+
 
                 if (Program.index == items.Count - 1)
                 {
@@ -331,10 +275,10 @@ namespace View
             }
             else if (ckey.Key == ConsoleKey.UpArrow)
             {
-                AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+                //AppExecBg();
+                //AppTitle();
+                //AppDesc();
+                //AppCopyRight();
                 if (Program.index <= 0)
                 {
                     Program.index = items.Count - 1;
@@ -402,9 +346,9 @@ namespace View
                     for (int i = 1; i < lstStrListeTaches_Longueur + 1; i++)
                     {
                         AppExecBg();
-                        AppTitle();
-                        AppDesc();
-                        AppCopyRight();
+                        //AppTitle();
+                        //AppDesc();
+                        //AppCopyRight();
                         Console.BackgroundColor = ConsoleColor.Green;
                         Console.CursorVisible = true;
                         Console.SetCursorPosition(25, 16);
@@ -446,12 +390,12 @@ namespace View
                 //}
                 //AppConsole();
                 Create();
-                Console.SetCursorPosition(Program.intLeft - 15, 21);
+                //Console.SetCursorPosition(Program.intLeft - 15, 21);
 
 
 
 
-                AppConsole();
+                //AppConsole();
 
                 Console.WriteLine("Press any key to quit...");
                 Console.ReadKey();
@@ -465,9 +409,9 @@ namespace View
                 string strTache = string.Empty;
                 Console.CursorVisible = true;
                 AppExecBg();
-                AppTitle();
-                AppDesc();
-                AppCopyRight();
+                //AppTitle();
+                //AppDesc();
+                //AppCopyRight();
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.CursorVisible = true;
                 Console.SetCursorPosition(25, 16);
@@ -512,42 +456,6 @@ namespace View
                 Console.SetCursorPosition(22, i);
                 Console.Write(new string(' ', 56));
             }
-        }
-        public static void AppCopyRight()
-        {
-            AppCopyRightBg();
-
-            Console.SetCursorPosition((Program.intWidth - Program.strCopyRight.Length) - 3, 27);
-            Console.WriteLine(Program.strCopyRight + " ");
-
-            Console.SetCursorPosition(2, 27);
-            Console.Write(" " + DateTime.Now);
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-            Console.CursorVisible = false;
-        }
-        static void AppCopyRightBg()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.BackgroundColor = ConsoleColor.White;
-            for (int i = 26; i < 29; i++)
-            {
-                Console.SetCursorPosition(2, i);
-                Console.Write(new string(' ', 86));
-            }
-        }
-        public static void AppQuit()
-        {
-            Console.SetCursorPosition(35, 24);
-            Console.CursorVisible = false;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Press any key to quit...");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-            Console.ReadKey();
-            Environment.Exit(0);
         }
     }
 }

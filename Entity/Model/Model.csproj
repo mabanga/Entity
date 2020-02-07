@@ -46,6 +46,7 @@
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Models\Animal.cs" />
     <Compile Include="Models\Abstract\APerson.cs" />
+    <Compile Include="Models\MyConsole.cs" />
     <Compile Include="Models\Name.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Abstract\Unity.cs" />
