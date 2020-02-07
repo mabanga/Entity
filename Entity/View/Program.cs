@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace View
 {
-    class Program
+    public class Program
     {
         public static String strConsoleTitle;
         public static int intHeight = 30;
@@ -20,7 +20,7 @@ namespace View
         public static string strAppDesc2 = "Vous pourriez créer, ou modifier l'arbre";
         public static string strAppDesc3 = "Commencez par créer une personne";
         public static string strCopyRight = "CopyRight 2020 - ZM Co";
-        public static string strAppTitle = "arbre géalogique";
+        public static string strAppTitle = "arbre généalogique";
         static void Main(string[] args)
         {
             IUnity tussen = new Switch().Bridge();
@@ -124,6 +124,41 @@ namespace View
             #endregion
             Console.ReadKey();
         }
+        static void Create()
+        {
+            IUnity tussen = new Switch().Bridge();
+            var entities = tussen.Unities();
+            var persons = tussen.Persons();
+            var animals = tussen.Animals();
+            int CreatedMenu = -1;
+            Console.SetCursorPosition(35, 12);
+
+            string creating = "You are about Creating...";
+            Console.WriteLine(creating);
+            while (CreatedMenu != 0)
+            {
+                Console.SetCursorPosition(30, 13);
+
+                CreatedMenu = Action("Choose 0(Quit) - 1(Person) - 2(Animal): ");
+                switch (CreatedMenu)
+                {
+                    case 1:
+                        Console.Clear();
+                        Start();
+                        Console.WriteLine("You are about to Create a Person");
+                        tussen.CreatePerson();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Start();
+                        Console.WriteLine("You are about to Create an animal");
+                        tussen.CreateAnimal();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         private static int Action(string message)
         {
             int action;
@@ -213,7 +248,7 @@ namespace View
         public static void AppExec()
         {
             AppExecBg();
-            List<string> menuItems = new List<string>() { "voir", "ajouter", "modifier", "exit" };
+            List<string> menuItems = new List<string>() { "create", "read", "update", "delete","exit" };
 
             Console.CursorVisible = false;
 
@@ -228,17 +263,20 @@ namespace View
                 Program.intLeft = 40; Program.intTop = 14;
                 switch (strSelectedMenuItem)
                 {
-                    case "voir":
-                        Menu.MenuVoir();
+                    case "create":
+                        Menu.MenuCreate();
                         break;
-                    case "ajouter":
-                        Menu.MenuAjout();
+                    case "read":
+                        Menu.MenuRead();
                         break;
-                    case "modifier":
-                        Menu.MenuModifier();
+                    case "update":
+                        Menu.MenuUpdate();
+                        break;
+                    case "delete":
+                        Menu.MenuDelete();
                         break;
                     case "exit":
-                        Menu.MenuExit();
+                        Menu.MenuDelete();
                         break;
                     default:
                         Console.WriteLine("");
@@ -252,9 +290,9 @@ namespace View
             Console.SetCursorPosition(intLeft, intTop);
             for (int i = 0; i < items.Count; i++)
             {
-                List<string> menuItemsDescription = new List<string>() { "ici pour voir les taches à faire",
-                "ici pour ajouter des taches","ici pour modifier ou supprimer les taches",
-                "ici pour quitter l'application"};
+                List<string> menuItemsDescription = new List<string>() { "You are about to CREATE",
+                "You are about to READ","You are about to UPDATE","You are about to DELETE",
+                "You are about to QUIT"};
                 Console.SetCursorPosition(intLeft, intTop += 2);
 
                 if (i == Program.index)
@@ -321,7 +359,7 @@ namespace View
         {
             private const string Path = @"c:\Res\dailypurpose.txt";
 
-            public static void MenuExit()
+            public static void MenuDelete()
             {
                 AppExecBgAll();
                 for (int i = 11; i < 50; i += 15)
@@ -349,7 +387,7 @@ namespace View
                     Console.Write(new string(' ', 69));
                 }
             }
-            public static void MenuAjout()
+            public static void MenuRead()
             {
                 List<string> lstStrListeTaches = new List<string> { };
                 AppExecBg();
@@ -396,23 +434,30 @@ namespace View
 
                 Thread.Sleep(1500);
             }
-            public static void MenuVoir()
+            public static void MenuCreate()
             {
                 AppExecBg();
-                Console.SetCursorPosition(Program.intLeft - 15, 11 + 2);
-                using (StreamReader sr = new StreamReader(File.Open(Path, FileMode.Open)))
-                {
-                    Console.WriteLine(sr.ReadLine());
-                    sr.Close();
-                    Thread.Sleep(3000);
-                }
+                //Console.SetCursorPosition(35, 12);
+                //using (StreamReader sr = new StreamReader(File.Open(Path, FileMode.Open)))
+                //{
+                //    Console.WriteLine(sr.ReadLine());
+                //    sr.Close();
+                //    Thread.Sleep(3000);
+                //}
+                //AppConsole();
+                Create();
                 Console.SetCursorPosition(Program.intLeft - 15, 21);
+
+
+
+
+                AppConsole();
 
                 Console.WriteLine("Press any key to quit...");
                 Console.ReadKey();
 
             }
-            public static void MenuModifier()
+            public static void MenuUpdate()
             {
                 List<string> lstStrListeTaches = new List<string> { };
                 AppExecBg();
