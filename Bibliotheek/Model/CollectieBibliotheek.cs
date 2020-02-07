@@ -10,6 +10,7 @@ namespace Model
     {
         List<Item> ItemsInCollectie;
         List<Item> AfgevoerdeItems;
-        List<Item> Leden { get; }
+        List<Item> Lid { get; }
+        List<Item> Medewerker { get; }
     }
 }
